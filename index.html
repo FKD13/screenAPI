@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<canvas id="the-canvas" width="400" height="300"
+        style="position:fixed; left:0; top:0; height: 100%; width:100%; border: 1px solid black; image-rendering: pixelated; background-color: black"></canvas>
+<script>
+    let canvas = document.getElementById('the-canvas');
+    let ctx = canvas.getContext("2d");
+
+    let socket = new WebSocket(`ws://${location.host}/feed`)
+
+    socket.onmessage = e => {
+        let data = JSON.parse(e.data)
+        console.log(data)
+        ctx.fillStyle = `#${data.color}`;
+        ctx.fillRect(data.width, data.height, 1, 1);
+    }
+</script>
+</body>
+</html>
