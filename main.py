@@ -60,10 +60,6 @@ async def draw(websocket: WebSocket):
     try:
         while True:
             data = await websocket.receive_json()
-            match data:
-                case {'width': _, 'height': _, 'color': _}:
-                    await queue_manager.broadcast(data)
-                case _:
-                    pass
+            await queue_manager.broadcast(data)
     except websockets.exceptions.ConnectionClosedOK:
         pass
