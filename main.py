@@ -53,3 +53,17 @@ async def feed(websocket: WebSocket):
     finally:
         await queue_manager.remove(queue)
 
+
+@app.websocket('/draw')
+async def draw(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_json()
+            match data:
+                case {'width': _, 'height': _, 'color': _}:
+                    await queue_manager.broadcast(data)
+                case _:
+                    pass
+    except websockets.exceptions.ConnectionClosedOK:
+        pass
