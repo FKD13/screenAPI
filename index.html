@@ -16,8 +16,8 @@
     socket.onmessage = e => {
         let data = JSON.parse(e.data)
         console.log(data)
-        ctx.fillStyle = `#${data.color}`;
-        ctx.fillRect(data.width, data.height, 1, 1);
+        ctx.fillStyle = `#${data.c}`;
+        ctx.fillRect(data.w, data.h, 1, 1);
     }
 </script>
 </body>

@@ -36,7 +36,7 @@ async def main(request: Request):
 
 @app.post('/{width}/{height}/{color}')
 async def post(width: int, height: int, color: str):
-    await queue_manager.broadcast({'width': width, 'height': height, 'color': color})
+    await queue_manager.broadcast({'w': width, 'h': height, 'c': color})
     return 'OK'
 
 
